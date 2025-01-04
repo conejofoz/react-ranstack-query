@@ -13,6 +13,7 @@ const Page = ()=>{
       <h1 className="text-3xl">Opa, tudo bem?</h1>
       {/* O controle de loading é feito pelo próprio tanstack */}
       {posts.isLoading && "Carregando..."}
+      {!posts.isLoading && posts.isFetching && "Está recarregando..."}
 
       <ul>
         {posts.data?.map((item)=>(
