@@ -3,6 +3,7 @@ import { getPost, getPosts } from "./api";
 
 export const usePosts = ()=>{
     const query = useQuery({
+        networkMode: 'online', //default //always não monitora
         queryKey: ['posts'],
         queryFn: getPosts
     });
