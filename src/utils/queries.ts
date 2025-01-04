@@ -11,7 +11,7 @@ export const usePosts = ()=>{
 
 export const usePost = (id: number)=>{
     const query = useQuery({
-        queryKey: ['post', id],
+        queryKey: ['posts', id], //é posts mesmo, ele vai filtrar na lista de posts
         queryFn: () => getPost(id)
     });
     return query;

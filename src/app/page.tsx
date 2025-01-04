@@ -1,9 +1,5 @@
 "use client"
 
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { Post } from "../types/Post";
-import { getPosts } from "../utils/api";
 import { usePost, usePosts } from "../utils/queries";
 
 const Page = ()=>{
