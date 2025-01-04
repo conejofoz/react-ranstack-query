@@ -8,7 +8,17 @@ type Props = {
     children: ReactNode;
 }
 export const Providers = ({children}: Props)=>{
-    const queryClient = new QueryClient();
+    /* 
+        Essa constante queryClient também pode ser colocado em um arquivo separado
+        exportada e depois importada nesse arquivo
+     */
+    const queryClient = new QueryClient({ 
+        defaultOptions:{
+            queries:{
+                staleTime: 5000
+            }
+        }
+    });
     return (
         <QueryClientProvider client={queryClient}>
             {children}

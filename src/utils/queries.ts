@@ -6,7 +6,6 @@ export const usePosts = ()=>{
         networkMode: 'online', //default //always não monitora
         queryKey: ['posts'],
         queryFn: getPosts,
-        staleTime: 5000, //5seg sem refresh //infinity tempo indetermindado
     });
     return query;
 }
