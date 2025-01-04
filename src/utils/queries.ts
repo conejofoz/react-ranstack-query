@@ -5,7 +5,8 @@ export const usePosts = ()=>{
     const query = useQuery({
         networkMode: 'online', //default //always não monitora
         queryKey: ['posts'],
-        queryFn: getPosts
+        queryFn: getPosts,
+        staleTime: 5000, //5seg sem refresh //infinity tempo indetermindado
     });
     return query;
 }
