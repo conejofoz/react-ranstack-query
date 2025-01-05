@@ -1,4 +1,4 @@
-import { keepPreviousData, QueryClient, useQuery } from "@tanstack/react-query"
+import { keepPreviousData, QueryClient, useQuery, useQueryClient } from "@tanstack/react-query"
 import { getPost, getPosts, getUsers } from './api';
 import { postsInitialData } from "../data/postsInitialData";
 
@@ -34,9 +34,16 @@ export const useUsers = ()=>{
 }
 
 export const useUsersPrefetch = ()=>{
-    const queryCliente = new QueryClient() //se eu tivesse criado um arquivo separado para o queryCliente não precisaria recriar aqui pq já tem um no provider
+    //const queryClient = new QueryClient() //se eu tivesse criado um arquivo separado para o queryCliente não precisaria recriar aqui pq já tem um no provider
+    
+    /* 
+        Refatorando para pegar o queryClient que está sendo usado através do hook useQueryClient,
+        evitando criar vários como fiz anteriormente que estava causando várias requisições de user.
+        Obs: se criado em arquivo separado também funcionaria.
+     */
+    const queryClient = useQueryClient()
 
-    return queryCliente.prefetchQuery({
+    return queryClient.prefetchQuery({
         queryKey: ['users'],
         queryFn: getUsers
     });
