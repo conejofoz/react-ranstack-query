@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { invalidatePosts, usePost, usePosts, useUsersPrefetch } from "../utils/queries";
+import { useMutation } from "@tanstack/react-query";
+import { addPost } from "../utils/api";
 
 const Page = ()=>{
   useUsersPrefetch();
@@ -29,6 +31,16 @@ const Page = ()=>{
     //fazer o procedimento de inserção aqui
 
     invalidatePosts();
+  }
+
+  const addMutation = useMutation({mutationFn: addPost});
+
+  const handleAddButton = ()=>{
+    addMutation.mutate({
+      title: 'Teste',
+      body: 'Corpo de teste',
+      userId: 7
+    });
   }
 
 
@@ -62,6 +74,13 @@ const Page = ()=>{
           <li key={item.id}>{item.title}</li>
         ))}
       </ul>
+
+      {/* mutations */}
+      <div className="border p-3 my-3">
+        <p className="block">Add post com mutation</p> 
+        <button onClick={handleAddButton}>Inserir novo post</button>
+      </div>
+
     </div>
   )
 }
