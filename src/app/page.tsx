@@ -78,6 +78,10 @@ const Page = ()=>{
       {/* mutations */}
       <div className="border p-3 my-3">
         <p className="block">Add post com mutation</p> 
+
+        <p>{addMutation.isSuccess && "Inserido com sucesso!"}</p>
+        {addMutation.status}
+
         <button onClick={handleAddButton}>Inserir novo post</button>
       </div>
 
