@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react";
-import { usePost, usePosts, useUsersPrefetch } from "../utils/queries";
+import { invalidatePosts, usePost, usePosts, useUsersPrefetch } from "../utils/queries";
 
 const Page = ()=>{
   useUsersPrefetch();
@@ -25,6 +25,12 @@ const Page = ()=>{
     setPage(page + 1);
   }
 
+  const handleInsertNewPostButtom = ()=>{
+    //fazer o procedimento de inserção aqui
+
+    invalidatePosts();
+  }
+
 
   return (
     <div className="container mx-auto">
@@ -40,6 +46,11 @@ const Page = ()=>{
         <div>Número da página: {page}</div>
         <button onClick={handlePrevButton} className="border mx-2 px-2 bg-blue-400">Página Anterior</button>
         <button onClick={handleNextButton} className="border mx-2 px-2 bg-blue-400">Proxima Página</button>
+      </div>
+      
+      <div className="border p-3 my-3">
+        <p className="block">Área de inserção de novo post</p>
+        <button onClick={handleInsertNewPostButtom}>Inserir novo post</button>
       </div>
 
       {/* O controle de loading é feito pelo próprio tanstack */}

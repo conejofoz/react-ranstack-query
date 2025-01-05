@@ -1,6 +1,7 @@
 import { keepPreviousData, QueryClient, useQuery, useQueryClient } from "@tanstack/react-query"
 import { getPost, getPosts, getUsers } from './api';
 import { postsInitialData } from "../data/postsInitialData";
+import { queryClient } from "./queryClient";
 
 export const usePosts = (enabled:boolean, limit: number, start: number)=>{
     const query = useQuery({
@@ -42,9 +43,21 @@ export const useUsersPrefetch = ()=>{
         Obs: se criado em arquivo separado também funcionaria.
      */
     const queryClient = useQueryClient()
-
+    
     return queryClient.prefetchQuery({
         queryKey: ['users'],
         queryFn: getUsers
     });
+}
+
+export const invalidatePosts = ()=>{
+    //const queryClient = new QueryClient(); // oh preguiça... se tivesse exportado
+    //segundo o professor aqui não se pode usar o hook useQueryClient
+
+    queryClient.invalidateQueries({ //ufa exportei e importei
+        queryKey: ['posts'],
+        //exact: true //opcional
+    });
+
+    //obs: só funcionou usando o queryClient importado do arquivo separado...creio que é pq usa a mesma instância
 }

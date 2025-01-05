@@ -1,5 +1,7 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Projetinho com finalidade de aprendizado, por isso os comentários no código
+
 ## Getting Started
 
 First, run the development server:
@@ -38,3 +40,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ## Devtools
 Adicionar no ponto mais alto da aplicação, no caso desse projeto ter sido criado com next adicionei no layout.tsx mesmo.
 
+
+# Invalidando uma Query do TanStack
+
+Uma vez que uma query é invalidada o TanStack automaticamente faz uma nova requisição para a queryKey invalidada.
