@@ -1,9 +1,10 @@
 "use client"
 
 import { useState } from "react";
-import { usePost, usePosts } from "../utils/queries";
+import { usePost, usePosts, useUsersPrefetch } from "../utils/queries";
 
 const Page = ()=>{
+  useUsersPrefetch();
   const limit = 3;
   const [page, setPage] = useState(0);
   const [canLoadPosts, setCanLoadPosts] = useState(false);

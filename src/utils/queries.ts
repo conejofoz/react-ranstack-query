@@ -1,5 +1,5 @@
-import { keepPreviousData, useQuery } from "@tanstack/react-query"
-import { getPost, getPosts } from "./api";
+import { keepPreviousData, QueryClient, useQuery } from "@tanstack/react-query"
+import { getPost, getPosts, getUsers } from './api';
 import { postsInitialData } from "../data/postsInitialData";
 
 export const usePosts = (enabled:boolean, limit: number, start: number)=>{
@@ -23,4 +23,21 @@ export const usePost = (id: number)=>{
         queryFn: () => getPost(id)
     });
     return query;
+}
+
+export const useUsers = ()=>{
+    const query = useQuery({
+        queryKey: ['users'], 
+        queryFn: getUsers
+    });
+    return query;
+}
+
+export const useUsersPrefetch = ()=>{
+    const queryCliente = new QueryClient() //se eu tivesse criado um arquivo separado para o queryCliente não precisaria recriar aqui pq já tem um no provider
+
+    return queryCliente.prefetchQuery({
+        queryKey: ['users'],
+        queryFn: getUsers
+    });
 }
