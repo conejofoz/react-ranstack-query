@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { invalidatePosts, usePost, usePosts, useUsersPrefetch } from "../utils/queries";
-import { useMutation } from "@tanstack/react-query";
-import { addPost } from "../utils/api";
+import { useAddPost } from "../utils/mutations";
 
 const Page = ()=>{
   useUsersPrefetch();
@@ -33,21 +32,7 @@ const Page = ()=>{
     invalidatePosts();
   }
 
-  const addMutation = useMutation({
-    mutationFn: addPost,
-    onMutate: (data)=>{
-      console.log('dados da mutation: ', data);
-    },
-    onError: ()=>{
-      //alguma coisa se der erro
-    },
-    onSuccess:()=>{
-      //alguma coisa se der certo
-    },
-    onSettled:()=>{
-      // deu certo ou errado sempre passa aqui
-    }
-  });
+  const addPost = useAddPost()
 
   
   const handleAddButton = async ()=>{
@@ -58,15 +43,7 @@ const Page = ()=>{
       userId: 7
     }
 
-    try {
-    
-      const retorno = await addMutation.mutateAsync(data);
-    
-    } catch (error) {
-    
-      console.log(error)
-    
-    }
+    addPost.mutate(data);
     
   }
 
@@ -106,8 +83,8 @@ const Page = ()=>{
       <div className="border p-3 my-3">
         <p className="block">Add post com mutation</p> 
 
-        <p>{addMutation.isSuccess && "Inserido com sucesso!"}</p>
-        <p onClick={()=>addMutation.reset()}>Status: {addMutation.status}</p>
+        <p>{addPost.isSuccess && "Inserido com sucesso!"}</p>
+        <p onClick={()=>addPost.reset()}>Status: {addPost.status}</p>
 
         <button onClick={handleAddButton}>Inserir novo post</button>
       </div>
