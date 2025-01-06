@@ -49,12 +49,25 @@ const Page = ()=>{
     }
   });
 
-  const handleAddButton = ()=>{
-    addMutation.mutate({
+  
+  const handleAddButton = async ()=>{
+    
+    const data = {
       title: 'Teste',
       body: 'Corpo de teste',
       userId: 7
-    });
+    }
+
+    try {
+    
+      const retorno = await addMutation.mutateAsync(data);
+    
+    } catch (error) {
+    
+      console.log(error)
+    
+    }
+    
   }
 
 
