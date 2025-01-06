@@ -33,7 +33,21 @@ const Page = ()=>{
     invalidatePosts();
   }
 
-  const addMutation = useMutation({mutationFn: addPost});
+  const addMutation = useMutation({
+    mutationFn: addPost,
+    onMutate: (data)=>{
+      console.log('dados da mutation: ', data);
+    },
+    onError: ()=>{
+      //alguma coisa se der erro
+    },
+    onSuccess:()=>{
+      //alguma coisa se der certo
+    },
+    onSettled:()=>{
+      // deu certo ou errado sempre passa aqui
+    }
+  });
 
   const handleAddButton = ()=>{
     addMutation.mutate({
