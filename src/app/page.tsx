@@ -80,7 +80,7 @@ const Page = ()=>{
         <p className="block">Add post com mutation</p> 
 
         <p>{addMutation.isSuccess && "Inserido com sucesso!"}</p>
-        {addMutation.status}
+        <p onClick={()=>addMutation.reset()}>Status: {addMutation.status}</p>
 
         <button onClick={handleAddButton}>Inserir novo post</button>
       </div>
